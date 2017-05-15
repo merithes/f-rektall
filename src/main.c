@@ -1,52 +1,52 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/11 14:20:37 by vboivin           #+#    #+#             */
-/*   Updated: 2017/05/11 19:37:15 by vboivin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "hfractol.h"
 
-void				frac(void *p[2])
+void				exits(int errno, t_inf *inf)
 {
-	float x;
-	float y;
-	int maxIterations = 50; // increasing this will give you a more detailed fractal
-
-	complex double Z;
-	complex double C;
-	int iterations;
-	for(x=-2; x<=2; x+= (float)(4/(float)WIDTH))
+	if (inf)
 	{
-		for(y=-2; y<=2; y+= (float)(4/(float)HEIGHT))
-		{
-			iterations = 0;
-			C = CMPLX(x, y);
-			Z = 0;
-			while(cabs(Z) < 2 && iterations < maxIterations)
-			{
-				Z = Z*Z + C;
-				iterations++;
-			}
-			printf("printing:(%d;%d)::%d\n", (int)(((x/4) * WIDTH) + WIDTH/2), (int)(((y/4) * HEIGHT) + HEIGHT/2), iterations);
-			if (iterations > 0)
-				mlx_pixel_put(p[MLXID], p[WINID], (int)(((x / 4) * WIDTH) + (WIDTH /2)), (int)(((y / 4) * HEIGHT) + (HEIGHT/2)), 0x010001 * iterations + (int)(((double)1/(double)iterations * 2) * 0X040001));
-			usleep(1);
-		}
+		mlx_destroy_window(inf->mid, inf->wid);
+		if (inf->img)
+			if (inf->img->pid)
+				mlx_destroy_image(inf->mid, inf->img->pid);
+		if (inf->img)
+			free(inf->img);
+		free(inf);
 	}
+	if (errno == 1)
+		ft_putstr("exiting.\n");
+	if (errno == 2)
+		ft_putstr("couldn't allocate memory.\n");
+	exit(errno);
+}
+
+t_inf				*set_inf(void)
+{
+	t_inf			*outp;
+
+	if (!(outp = malloc(S_INF)))
+		return (NULL);
+	outp->mid = NULL;
+	outp->wid = NULL;
+	outp->img = NULL;
+	outp->def = 5;
+	outp->mid = mlx_init();
+	outp->wid = mlx_new_window(outp->mid, WIDTH, HEIGHT, TITLE);
+	outp->xdlim = -2;
+	outp->xulim = 2;
+	outp->ydlim = -2;
+	outp->yulim = 2;
+	create_image(outp);
+	return (outp);
 }
 
 int					main(void)
 {
-	void			*p[2];
-
-	p[MLXID] = mlx_init();
-	p[WINID] = mlx_new_window(p[MLXID], WIDTH, HEIGHT, TITLE);
-	frac(p);
-	mlx_loop(p[MLXID]);
+	t_inf			*inf;
+	if (!(inf = set_inf()))
+		return (0);
+	mandelbrot(*inf);
+	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
+	mlx_key_hook(inf->wid, pull_event, inf);
+	mlx_loop(inf->mid);
+	return (0);
 }

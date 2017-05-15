@@ -36,6 +36,7 @@ HEADERS = .
 all: $(NAME)
 
 %.o: %.c libft.h Makefile
+	@printf "libft:compiling $< \r"
 	@gcc -Wall -Werror -Wextra -c $< -o $@ -I .
 
 $(NAME): $(SRCO)
