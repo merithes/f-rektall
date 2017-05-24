@@ -28,7 +28,7 @@ t_inf				*set_inf(void)
 	outp->mid = NULL;
 	outp->wid = NULL;
 	outp->img = NULL;
-	outp->def = 5;
+	outp->def = MX_IT;
 	outp->mid = mlx_init();
 	outp->wid = mlx_new_window(outp->mid, WIDTH, HEIGHT, TITLE);
 	outp->xdlim = -2;

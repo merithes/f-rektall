@@ -27,19 +27,23 @@
 # define MLXID 0
 # define WINID 1
 
-# define MX_IT 30
-# define DIFF_IT 1
+# define MX_IT 5
+# define DIFF_IT 3
 
-# define DIFF_X (1/(float)100)
-# define DIFF_Y (1/(float)100)
+# define DIFF_X (1/(float)10)
+# define DIFF_Y (1/(float)10)
+
+# define DIFF_MARG (1/(float)10)
 
 /*
 ** MATH
 */
 
-# define TRX(a) ((int)(((a / 2) * WIDTH )))
-# define TRY(a) ((int)(((a / 2) * HEIGHT)))
+# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * WIDTH  + WIDTH  / ((b.xdlim + 2) / 4)))
+# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + HEIGHT / ((b.ydlim + 2) / 4)))
 
+//# define TRX(a) ((int)(((a / 4) * WIDTH ) + (WIDTH  / 2))
+//# define TRY(a) ((int)(((a / 4) * HEIGHT) + (HEIGHT / 2))
 /*
 ** OTHERS
 */
@@ -70,6 +74,8 @@ typedef struct			s_inf
 	double				xulim;
 	double				ydlim;
 	double				yulim;
+	float				margx;
+	float				margy;
 }						t_inf;
 
 /*
