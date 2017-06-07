@@ -44,8 +44,8 @@
 ** MATH
 */
 
-# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * HEIGHT + HEIGHT / 2 + HEIGHT * (double)(b.xulim + b.xdlim)))
-# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + HEIGHT / 2 + HEIGHT * (double)(b.yulim + b.ydlim)))
+# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * HEIGHT + (HEIGHT / 2) - 1 * HEIGHT * ((b.xdlim + 2) / 4)))
+# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + (HEIGHT / 2) - 1 * HEIGHT * ((b.ydlim + 2) / 4)))
 # define PYTH(a, b) (sqrt(a * a + b * b))
 # define CMPLX(x, y) ((double _Complex){ x, y })
 

@@ -6,7 +6,7 @@
 #    By: vboivin <marvin42.fr>                     +#+   +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2017/06/07 12:27:40 by vboivin          ###   ########.fr        #
+#    Updated: 2017/06/07 16:28:45 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,3 +53,7 @@ fclean:
 	@rm -rf $(DIR_OBJ)
 
 re: fclean all
+
+mk:
+	@rm $(DIR_OBJ)
+	@make all
