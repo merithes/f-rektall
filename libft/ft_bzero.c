@@ -23,5 +23,8 @@ void	ft_bzero(void *str, size_t bytes_to_set)
 		return ;
 	else
 		while (i < bytes_to_set)
-			chr_str[i++] = '\0';
+		{
+			*chr_str++ = '\0';
+			i++;
+		}
 }

@@ -39,11 +39,12 @@
 ** MATH
 */
 
-# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * WIDTH  + WIDTH  / ((b.xdlim + 2) / 4)))
-# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + HEIGHT / ((b.ydlim + 2) / 4)))
-
+# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * WIDTH  + (WIDTH  * ((b.xdlim * -1) / 4))))
+# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + (HEIGHT * ((b.ydlim * -1) / 4))))
 //# define TRX(a) ((int)(((a / 4) * WIDTH ) + (WIDTH  / 2))
 //# define TRY(a) ((int)(((a / 4) * HEIGHT) + (HEIGHT / 2))
+# define DEF_SET(a, b) ((sqrt(a * a + b * b) / sqrt(HEIGHT * HEIGHT + WIDTH * WIDTH)) * 30)
+
 /*
 ** OTHERS
 */
@@ -69,6 +70,7 @@ typedef struct			s_inf
 	void				*wid;
 	void				*mid;
 	int					def;
+	int					safe;
 	t_img				*img;
 	double				xdlim;
 	double				xulim;
@@ -87,6 +89,7 @@ void					create_image(t_inf *inf);
 void					set_pixie(t_inf *inf, int x, int y, unsigned int color);
 void					mandelbrot(t_inf inf);
 int						pull_event(int kc, void *prm);
+int						pull_cursor(int x, int y, void *prm);
 void					keyset(t_inf *inf, int kc);
 
 #endif

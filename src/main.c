@@ -31,9 +31,10 @@ t_inf				*set_inf(void)
 	outp->def = MX_IT;
 	outp->mid = mlx_init();
 	outp->wid = mlx_new_window(outp->mid, WIDTH, HEIGHT, TITLE);
-	outp->xdlim = -2;
+	outp->safe = 0;
+	outp->xdlim = 0;
 	outp->xulim = 2;
-	outp->ydlim = -2;
+	outp->ydlim = 0;
 	outp->yulim = 2;
 	create_image(outp);
 	return (outp);
@@ -46,7 +47,8 @@ int					main(void)
 		return (0);
 	mandelbrot(*inf);
 	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
-	mlx_key_hook(inf->wid, pull_event, inf);
+	mlx_hook(inf->wid, 2, 3, pull_event, inf);
+	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);
 	mlx_loop(inf->mid);
 	return (0);
 }

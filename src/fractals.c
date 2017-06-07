@@ -6,15 +6,16 @@ void				mandelbrot(t_inf inf)
 	complex double	p[2];
 	int				itera;
 
+	ft_bzero(inf.img->str, inf.img->len * HEIGHT);
 	coords[0] = inf.xdlim;
-	while((coords[0] += ((inf.xulim - inf.xdlim) / (double)(WIDTH + 1))) <= inf.xulim)
+	while((coords[0] += ((inf.xulim - inf.xdlim) / (double)(WIDTH + 1))) <= 2)
 	{
 		coords[1] = inf.ydlim;
 		while ((coords[1] += ((inf.yulim - inf.ydlim) / (double)(HEIGHT + 1)))
-					<= inf.yulim)
+					<= 2)
 		{
-			if ((TRX(coords[0], inf) <= WIDTH && TRX(coords[0], inf) >= 0) &&
-					(TRY(coords[1], inf) <= HEIGHT && TRY(coords[1], inf) >= 0))
+			if ((TRX(coords[0], inf) < WIDTH && TRX(coords[0], inf) >= 0) &&
+					(TRY(coords[1], inf) < HEIGHT && TRY(coords[1], inf) >= 0))
 			{
 				itera = 0;
 				p[0] = CMPLX(coords[0], coords[1]);
@@ -27,6 +28,5 @@ void				mandelbrot(t_inf inf)
 			}
 		}
 	}
-	mlx_put_image_to_window(inf.mid, inf.wid, inf.img->pid, 0, 0);
-//	printf("modd:(%f:%f), (%f;%f)\n", inf.xdlim, inf.xulim, inf.ydlim, inf.yulim);
+	printf("modd:(%f:%f), (%f;%f)\n", inf.xdlim, inf.xulim, inf.ydlim, inf.yulim);
 }
