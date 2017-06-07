@@ -6,13 +6,13 @@
 #    By: vboivin <marvin42.fr>                     +#+   +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2017/04/07 13:12:35 by vboivin          ###   ########.fr        #
+#    Updated: 2017/06/07 12:27:40 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fractol
 HPATH		= includes
-MLXPATH		= minilibx
+MLXPATH		= minilibx_macos
 INC			= -I$(HPATH) -Ilibft -I$(MLXPATH)
 FLAGS		= -Wall -Werror -Wextra
 FLAGSMLX	= -framework OpenGL -framework Appkit
@@ -36,9 +36,11 @@ $(OBJPATH)/%.o: $(SRCPATH)/%.c
 	@$(COMP) $(FLAGS) -c $< -o $@ $(INC)
 
 $(NAME): $(DIR_OBJ)
+	@printf "\r                                                             \r"
+	@printf "mlx:\tdone\n"
 	@make -C libft
 	@make -C $(MLXPATH)
-	@$(COMP) $(DIR_OBJ) -o $(NAME) $(INCMAC) $(LIBFT) $(FLAGS) $(MLX) $(FLAGSX11)
+	@$(COMP) $(DIR_OBJ) -o $(NAME) $(INCMAC) $(LIBFT) $(FLAGS) $(MLX) $(FLAGSMLX)
 
 clean:
 	@make clean -C $(MLXPATH)

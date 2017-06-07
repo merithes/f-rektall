@@ -32,9 +32,10 @@ t_inf				*set_inf(void)
 	outp->mid = mlx_init();
 	outp->wid = mlx_new_window(outp->mid, WIDTH, HEIGHT, TITLE);
 	outp->safe = 0;
-	outp->xdlim = 0;
+	outp->color = 0x000101;
+	outp->xdlim = -2;
 	outp->xulim = 2;
-	outp->ydlim = 0;
+	outp->ydlim = -2;
 	outp->yulim = 2;
 	create_image(outp);
 	return (outp);
@@ -48,6 +49,7 @@ int					main(void)
 	mandelbrot(*inf);
 	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
 	mlx_hook(inf->wid, 2, 3, pull_event, inf);
+	mlx_mouse_hook(inf->wid, pull_ckey, inf);
 	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);
 	mlx_loop(inf->mid);
 	return (0);

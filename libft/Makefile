@@ -6,7 +6,7 @@
 #    By: vboivin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/02 19:24:22 by vboivin           #+#    #+#              #
-#    Updated: 2017/03/29 11:49:07 by vboivin          ###   ########.fr        #
+#    Updated: 2017/06/07 14:03:14 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ all: $(NAME)
 	@gcc -Wall -Werror -Wextra -c $< -o $@ -I .
 
 $(NAME): $(SRCO)
+	@printf "\r                                                             \r"
+	@printf "libft:\tdone\n"
 	@ar rc $(NAME) $(SRCO)
 	@ranlib $(NAME)
 

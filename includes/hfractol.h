@@ -5,7 +5,6 @@
 # include <unistd.h>
 # include <math.h>
 # include <string.h>
-# include <complex.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -13,8 +12,8 @@
 ** WINDOW PROPERTIES
 */
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1000
+# define HEIGHT 1000
 # define TITLE "Fractroll"
 
 /*
@@ -24,11 +23,17 @@
 # define X 0
 # define Y 1
 
+# define ZR 0
+# define ZI 1
+# define CR 2
+# define CI 3
+
 # define MLXID 0
 # define WINID 1
 
 # define MX_IT 5
 # define DIFF_IT 3
+# define DEF_COL 0x000101
 
 # define DIFF_X (1/(float)10)
 # define DIFF_Y (1/(float)10)
@@ -39,11 +44,10 @@
 ** MATH
 */
 
-# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * WIDTH  + (WIDTH  * ((b.xdlim * -1) / 4))))
-# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + (HEIGHT * ((b.ydlim * -1) / 4))))
-//# define TRX(a) ((int)(((a / 4) * WIDTH ) + (WIDTH  / 2))
-//# define TRY(a) ((int)(((a / 4) * HEIGHT) + (HEIGHT / 2))
-# define DEF_SET(a, b) ((sqrt(a * a + b * b) / sqrt(HEIGHT * HEIGHT + WIDTH * WIDTH)) * 30)
+# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * HEIGHT + HEIGHT / 2 + HEIGHT * (double)(b.xulim + b.xdlim)))
+# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + HEIGHT / 2 + HEIGHT * (double)(b.yulim + b.ydlim)))
+# define PYTH(a, b) (sqrt(a * a + b * b))
+# define CMPLX(x, y) ((double _Complex){ x, y })
 
 /*
 ** OTHERS
@@ -71,6 +75,7 @@ typedef struct			s_inf
 	void				*mid;
 	int					def;
 	int					safe;
+	int					color;
 	t_img				*img;
 	double				xdlim;
 	double				xulim;
@@ -90,6 +95,7 @@ void					set_pixie(t_inf *inf, int x, int y, unsigned int color);
 void					mandelbrot(t_inf inf);
 int						pull_event(int kc, void *prm);
 int						pull_cursor(int x, int y, void *prm);
+int						pull_ckey(int kc, int x, int y, void *prm);
 void					keyset(t_inf *inf, int kc);
 
 #endif
