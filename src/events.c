@@ -68,15 +68,15 @@ int					pull_ckey(int kc, int x, int y, void *param)
 
 	inf = (t_inf *)param;
 	moreless = 0;
-	ratio = (HEIGHT / (double)WIDTH) / 10;
+	ratio = (HEIGHT / (double)WIDTH);
 	if (kc == 5 || kc == 4)
 		moreless = (kc == 5) ? -1  : 1;
 
-	printf("b:%d\tfor(%d;%d)\n", kc, x, y);
-	inf->ydlim += (moreless /(double)10);
-	inf->yulim -= (moreless /(double)10);
-	inf->xdlim += (moreless /(double)10);
-	inf->xulim -= (moreless /(double)10);
+//	printf("b:%d\tfor(%d;%d)\n", kc, x, y);
+	inf->ydlim *= 1 - (moreless /(double)10) * ratio;
+	inf->yulim *= 1 - (moreless /(double)10) * ratio;
+	inf->xdlim *= 1 - (moreless /(double)10);
+	inf->xulim *= 1 - (moreless /(double)10);
 	mandelbrot(*inf);
 	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
 	return (x - x + y - y);

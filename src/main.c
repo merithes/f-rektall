@@ -50,7 +50,7 @@ int					main(void)
 	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
 	mlx_hook(inf->wid, 2, 3, pull_event, inf);
 	mlx_mouse_hook(inf->wid, pull_ckey, inf);
-	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);
+//	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);
 	mlx_loop(inf->mid);
 	return (0);
 }
