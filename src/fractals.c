@@ -1,5 +1,29 @@
 #include "hfractol.h"
 
+t_inf				*set_inf(void)
+{
+	t_inf			*outp;
+
+	if (!(outp = malloc(S_INF)))
+		return (NULL);
+	outp->mid = NULL;
+	outp->wid = NULL;
+	outp->img = NULL;
+	outp->def = MX_IT;
+	outp->mid = mlx_init();
+	outp->wid = mlx_new_window(outp->mid, WIDTH, HEIGHT, TITLE);
+	outp->safe = 0;
+	outp->color = 0x000101;
+	outp->xdlim = -2;
+	outp->xulim = 2;
+	outp->ydlim = -2;
+	outp->yulim = 2;
+	outp->zoomey = 0;
+	outp->revert = 0;
+	create_image(outp);
+	return (outp);
+}
+
 unsigned int		iterations(int max, long double coords[2])
 {
 	long double		p[4];
@@ -13,8 +37,8 @@ unsigned int		iterations(int max, long double coords[2])
 	p[ZR] = 0;
 	while (i < max && PYTH(p[ZI], p[ZR]) < 4)
 	{
-		tmp = p[ZI]*p[ZI] - p[ZR]*p[ZR] + p[CR];
-		p[ZR] = 2*p[ZI]*p[ZR] + p[CI];
+		tmp = p[ZI] * p[ZI] - p[ZR] * p[ZR] + p[CR];
+		p[ZR] = ((p[ZI] * p[ZR]) * 2)  + p[CI];
 		p[ZI] = tmp;
 		i++;
 	}
@@ -27,7 +51,6 @@ void				mandelbrot(t_inf inf)
 	long double		lim[2];
 	int				itera;
 
-	ft_bzero(inf.img->str, inf.img->len * HEIGHT);
 	coords[0] = inf.xdlim;
 	lim[X] = inf.xdlim;
 	lim[Y] = inf.ydlim;
@@ -42,11 +65,10 @@ void				mandelbrot(t_inf inf)
 				itera = iterations(inf.def, coords);
 				set_pixie(&inf, TRX(coords[0], inf) - TRX(lim[X], inf) * 0, 
 						TRY(coords[1], inf) - TRY(lim[Y], inf) * 0,
-							inf.color * itera
-						+ DEF_COL * (int)((itera / (float)inf.def) * 100));
+							((itera * 5 ) << 16) + (itera * 5));
 			}
 		}
 	}
-	set_pixie(&inf, 25, 25, 0xFFFFFF);
-	printf("modd:(%f:%f), (%f;%f)\n", inf.xdlim, inf.xulim, inf.ydlim, inf.yulim);
 }
+
+

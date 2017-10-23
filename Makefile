@@ -6,7 +6,7 @@
 #    By: vboivin <marvin42.fr>                     +#+   +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2017/06/07 16:28:45 by vboivin          ###   ########.fr        #
+#    Updated: 2017/10/23 08:18:28 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ COMP		= gcc
 LIBFT		= -Llibft -lft
 MLX			= -L$(MLXPATH) -lmlx
 
-SRCS 		= main.c image_manage.c fractals.c events.c
+SRCS 		= main.c image_manage.c fractals.c events.c event_keys.c
 DIR_SRC		= $(addprefix $(SRCPATH)/, $(SRCS))
 SRCPATH		= src
 
@@ -51,6 +51,7 @@ fclean:
 	@make clean -C $(MLXPATH)
 	@make fclean -C libft
 	@rm -rf $(DIR_OBJ)
+	@rm -rf $(NAME)
 
 re: fclean all
 

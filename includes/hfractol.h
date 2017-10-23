@@ -12,8 +12,8 @@
 ** WINDOW PROPERTIES
 */
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 600
+# define HEIGHT 600
 # define TITLE "Fractroll"
 
 /*
@@ -31,7 +31,7 @@
 # define MLXID 0
 # define WINID 1
 
-# define MX_IT 5
+# define MX_IT 50
 # define DIFF_IT 3
 # define DEF_COL 0x000101
 
@@ -44,10 +44,9 @@
 ** MATH
 */
 
-# define TRX(a, b) ((int)((a / (b.xulim - b.xdlim)) * WIDTH + (WIDTH / 2)))
-# define TRY(a, b) ((int)((a / (b.yulim - b.ydlim)) * HEIGHT + (HEIGHT / 2)))
+# define TRX(a, b) ((int)(((a - b.xdlim) / (b.xulim - b.xdlim)) * WIDTH))
+# define TRY(a, b) ((int)(((a - b.ydlim) / (b.yulim - b.ydlim)) * HEIGHT))
 # define PYTH(a, b) (sqrt(a * a + b * b))
-# define CMPLX(x, y) ((double _Complex){ x, y })
 
 /*
 ** OTHERS
@@ -77,12 +76,12 @@ typedef struct			s_inf
 	int					safe;
 	int					color;
 	t_img				*img;
+	double				zoomey;
+	int					revert;
 	double				xdlim;
 	double				xulim;
 	double				ydlim;
 	double				yulim;
-	float				margx;
-	float				margy;
 }						t_inf;
 
 /*
