@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_keys.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/24 18:55:02 by vboivin           #+#    #+#             */
+/*   Updated: 2017/10/24 20:43:57 by vboivin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hfractol.h"
 
 void			move(t_inf *inf, int kc)
@@ -27,19 +39,13 @@ void			keyset(t_inf *inf, int kc)
 	i = 0;
 	if (kc == 0 || kc == 2 || kc == 1 || kc == 13)
 		move(inf, kc);
-	else if (kc == 15)
+	else if (kc == 15 && ++i)
 		inf->revert = inf->revert ? 0 : 1;
 	else if (kc == 65365 || kc == 65366 || kc == 116 || kc == 121)
 		inf->def += (kc == 65366 || kc == 116) ? DIFF_IT : -DIFF_IT;
-	else if (kc == 42 && ++i)
-		ft_bzero(inf->img->str, inf->img->len * HEIGHT);
-	else if (kc != -1)
-		i++;
 	inf->def = (inf->def < 0) ? 0 : inf->def;
 	if (!i)
-		mandelbrot(*inf);
-	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
-	ft_bzero(inf->img->str, inf->img->len * HEIGHT);
+		call_fractal(inf);
 }
 
 int					pull_event(int kc, void *param)

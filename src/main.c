@@ -19,11 +19,12 @@ void				exits(int errno, t_inf *inf)
 	exit(errno);
 }
 
-int					main(void)
+int					main(int ac, char *av[])
 {
 	t_inf			*inf;
-	mandelbrot(*inf);
-	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
+
+	if (!(inf = fractal_initiate(ac, av)))
+		return (0);
 	mlx_hook(inf->wid, 2, 3, pull_event, inf);
 	mlx_mouse_hook(inf->wid, pull_ckey, inf);
 	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);

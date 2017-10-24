@@ -20,6 +20,16 @@
 ** DEFINED VALUES
 */
 
+#define MANDL 1 << 0
+#define JULIA 1 << 1
+#define BSHIP 1 << 2
+#define OTONE 1 << 3
+#define OTTWO 1 << 4
+#define OTTHR 1 << 5
+
+#define NARG "No arguments provided\n"
+#define DARG "usage: fractol [mndelbrot:julia:bship]\n"
+
 # define X 0
 # define Y 1
 
@@ -72,6 +82,8 @@ typedef struct			s_inf
 {
 	void				*wid;
 	void				*mid;
+	int					fractal;
+	short				switcher;
 	int					def;
 	int					safe;
 	int					color;
@@ -82,6 +94,8 @@ typedef struct			s_inf
 	double				xulim;
 	double				ydlim;
 	double				yulim;
+	long double			ji;
+	long double			jr;
 }						t_inf;
 
 /*
@@ -91,10 +105,14 @@ typedef struct			s_inf
 void					exits(int errno, t_inf *inf);
 void					create_image(t_inf *inf);
 void					set_pixie(t_inf *inf, int x, int y, unsigned int color);
-void					mandelbrot(t_inf inf);
 int						pull_event(int kc, void *prm);
 int						pull_cursor(int x, int y, void *prm);
 int						pull_ckey(int kc, int x, int y, void *prm);
 void					keyset(t_inf *inf, int kc);
+t_inf					*fractal_initiate(int ac, char *av[]);
+void					call_fractal(t_inf *inf);
+
+void					mandelbrot(t_inf inf);
+void					julia(t_inf inf);
 
 #endif

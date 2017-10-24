@@ -6,14 +6,14 @@
 #    By: vboivin <marvin42.fr>                     +#+   +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2017/10/23 08:18:28 by vboivin          ###   ########.fr        #
+#    Updated: 2017/10/24 20:11:20 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fractol
 HPATH		= includes
 MLXPATH		= minilibx_macos
-INC			= -I$(HPATH) -Ilibft -I$(MLXPATH)
+INC			= -I$(HPATH) -Ilibft/includes -I$(MLXPATH)
 FLAGS		= -Wall -Werror -Wextra
 FLAGSMLX	= -framework OpenGL -framework Appkit
 FLAGSX11	= -lXext -lX11 -lm 
@@ -21,7 +21,8 @@ COMP		= gcc
 LIBFT		= -Llibft -lft
 MLX			= -L$(MLXPATH) -lmlx
 
-SRCS 		= main.c image_manage.c fractals.c events.c event_keys.c
+SRCS 		= main.c image_manage.c events.c event_keys.c hub.c \
+			  calls.c mandel.c julia.c
 DIR_SRC		= $(addprefix $(SRCPATH)/, $(SRCS))
 SRCPATH		= src
 
