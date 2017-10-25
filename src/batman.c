@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:07:39 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:42:58 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 10:07:19 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void				otone(t_inf inf)
 			{
 				itera = iterations(inf.def, coords);
 				set_pixie(&inf, TRX(coords[X], inf), TRY(coords[Y], inf),
-							((itera * 5) << 8) + (itera * 5));
+							((itera * 5) << 16) + ((itera * 5) << 8));
 			}
 		}
 	}
