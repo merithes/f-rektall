@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 10:01:11 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 10:04:20 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 10:05:58 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define RIBUG 1 << 6
 # define RAYMN 1 << 7
 
-# define DARGO "usage: fractol [mandelbrot:julia:devil:moth:batman
+# define DARGO "usage: fractol [mandelbrot:julia:devil:moth:batman"
 # define DARGS ":bship:rising_bug:ray_manta]\n"
 
 # define X 0
