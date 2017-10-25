@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 10:01:11 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 10:05:58 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 11:40:48 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int						pull_cursor(int x, int y, void *prm);
 int						pull_ckey(int kc, int x, int y, void *prm);
 void					keyset(t_inf *inf, int kc);
 t_inf					*fractal_initiate(int ac, char *av[]);
-void					call_fractal(t_inf *inf);
+int						call_fractal(t_inf *inf);
 
 void					mandelbrot(t_inf inf);
 void					julia(t_inf inf);

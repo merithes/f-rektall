@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:17:32 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:44:41 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 11:41:08 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				restate_infos(t_inf *inf)
 	inf->switcher = 0;
 }
 
-void				call_fractal(t_inf *inf)
+int					call_fractal(t_inf *inf)
 {
 	if (!inf)
 		exit(-1);
@@ -53,4 +53,5 @@ void				call_fractal(t_inf *inf)
 	else if (inf->fractal == RAYMN)
 		otfif(*inf);
 	mlx_put_image_to_window(inf->mid, inf->wid, inf->img->pid, 0, 0);
+	return (0);
 }
