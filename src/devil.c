@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:07:39 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:58:39 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 09:45:33 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ static unsigned int	iterations(int max, long double coords[2])
 	int				i;
 	double			tmp;
 
-	p[ZI] = 0.0001;
-	p[ZR] = 0.0001;
+	p[ZI] = 0;
+	p[ZR] = 0;
 	p[CR] = coords[X];
 	p[CI] = coords[Y];
 	i = 0;
 	while (i < max && PYTH(p[ZI], p[ZR]) < 4)
 	{
-		tmp = p[ZI] * p[ZI] - p[ZR] * p[ZR] + p[CR];
-		p[ZR] = ((p[ZI] * p[ZR]) * 2) + p[CI];
+		tmp = powl(p[ZI], 3) - 3 * p[ZI] * powl(p[ZR], 2) + p[CI];
+		p[ZR] = 2 * exp2l(p[ZI]) * p[ZR] - powl(p[ZR], 3) + p[CR];
 		p[ZI] = tmp;
 		i++;
 	}
 	return (i);
 }
 
-void				mandelbrot(t_inf inf)
+void				otthr(t_inf inf)
 {
 	long double		coords[2];
 	int				itera;
@@ -52,7 +52,7 @@ void				mandelbrot(t_inf inf)
 				itera = iterations(inf.def, coords);
 				set_pixie(&inf, TRX(coords[X], inf) - TRX(inf.xulim, inf) * 0,
 						TRY(coords[Y], inf) - TRY(inf.yulim, inf) * 0,
-							((itera * 5) << 8) + (itera * 5));
+							((itera * 5) << 16) + (itera << 8) + itera);
 			}
 		}
 	}

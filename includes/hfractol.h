@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hfractol.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/25 10:01:11 by vboivin           #+#    #+#             */
+/*   Updated: 2017/10/25 10:04:20 by vboivin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HFRACTOL_H
 # define HFRACTOL_H
 
@@ -5,6 +17,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <string.h>
+# include <time.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -13,22 +26,24 @@
 */
 
 # define WIDTH 600
-# define HEIGHT 600
+# define HEIGHT WIDTH
 # define TITLE "Fractroll"
 
 /*
 ** DEFINED VALUES
 */
 
-#define MANDL 1 << 0
-#define JULIA 1 << 1
-#define BSHIP 1 << 2
-#define OTONE 1 << 3
-#define OTTWO 1 << 4
-#define OTTHR 1 << 5
+# define MANDL 1
+# define JULIA 1 << 1
+# define BSHIP 1 << 2
+# define BATMN 1 << 3
+# define MOTHH 1 << 4
+# define DEVIL 1 << 5
+# define RIBUG 1 << 6
+# define RAYMN 1 << 7
 
-#define NARG "No arguments provided\n"
-#define DARG "usage: fractol [mndelbrot:julia:bship]\n"
+# define DARGO "usage: fractol [mandelbrot:julia:devil:moth:batman
+# define DARGS ":bship:rising_bug:ray_manta]\n"
 
 # define X 0
 # define Y 1
@@ -84,6 +99,7 @@ typedef struct			s_inf
 	void				*mid;
 	int					fractal;
 	short				switcher;
+	short				lock;
 	int					def;
 	int					safe;
 	int					color;
@@ -114,5 +130,11 @@ void					call_fractal(t_inf *inf);
 
 void					mandelbrot(t_inf inf);
 void					julia(t_inf inf);
+void					bship(t_inf inf);
+void					otone(t_inf inf);
+void					ottwo(t_inf inf);
+void					otthr(t_inf inf);
+void					otfou(t_inf inf);
+void					otfif(t_inf inf);
 
 #endif

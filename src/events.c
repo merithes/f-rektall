@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 08:17:43 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/24 21:20:57 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 09:47:05 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 int					pull_cursor(int x, int y, void *param)
 {
 	t_inf			*inf;
-	
+
 	inf = (t_inf *)param;
-	if (inf->safe++ % 6)
-		return 0;
+	if (!(inf->fractal & JULIA))
+		return (0);
+	if (!(inf->safe++ % 6) || inf->lock)
+		return (0);
 	x = (x > WIDTH) ? WIDTH : x;
 	x = (x < 0) ? 0 : x;
 	y = (y > HEIGHT) ? HEIGHT : y;
 	y = (y < 0) ? 0 : y;
-	inf->ji = (x / (double)WIDTH) * 20;
-	inf->jr = (y / (double)WIDTH) * 20;
+	if (!inf->lock)
+	{
+		inf->ji = (x / (double)WIDTH);
+		inf->jr = (y / (double)WIDTH);
+	}
+	call_fractal(inf);
 	return (0);
 }
 
@@ -53,7 +59,7 @@ int					pull_ckey(int kc, int x, int y, void *param)
 	moreless = 1;
 	if (kc == 5 || kc == 1 || kc == 4)
 	{
-		moreless = (kc == 5) ? -1  : 1;
+		moreless = (kc == 5) ? -1 : 1;
 		moreless *= inf->revert ? -1 : 1;
 		inf->zoomey += moreless;
 	}

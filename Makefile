@@ -6,7 +6,7 @@
 #    By: vboivin <marvin42.fr>                     +#+   +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2017/10/24 20:11:20 by vboivin          ###   ########.fr        #
+#    Updated: 2017/10/25 09:33:03 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ LIBFT		= -Llibft -lft
 MLX			= -L$(MLXPATH) -lmlx
 
 SRCS 		= main.c image_manage.c events.c event_keys.c hub.c \
-			  calls.c mandel.c julia.c
+			  calls.c mandel.c julia.c devil.c bship.c batman.c moth.c \
+			  rising_bug.c ray_manta.c
 DIR_SRC		= $(addprefix $(SRCPATH)/, $(SRCS))
 SRCPATH		= src
 

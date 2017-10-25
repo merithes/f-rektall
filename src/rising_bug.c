@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:07:39 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:58:39 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 10:00:56 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ static unsigned int	iterations(int max, long double coords[2])
 	i = 0;
 	while (i < max && PYTH(p[ZI], p[ZR]) < 4)
 	{
-		tmp = p[ZI] * p[ZI] - p[ZR] * p[ZR] + p[CR];
-		p[ZR] = ((p[ZI] * p[ZR]) * 2) + p[CI];
+		tmp = p[ZI] * p[ZI] - 3 * p[ZR] * p[ZR] -
+			p[ZR] * p[ZR] * p[ZI] * 13 + p[CI];
+		p[ZR] = ((p[ZI] * p[ZR]) * 4) + p[CR];
 		p[ZI] = tmp;
 		i++;
 	}
 	return (i);
 }
 
-void				mandelbrot(t_inf inf)
+void				otfou(t_inf inf)
 {
 	long double		coords[2];
 	int				itera;

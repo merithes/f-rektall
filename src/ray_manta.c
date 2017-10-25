@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 19:53:49 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:57:50 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 09:59:50 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ static int			iterations(long double coords[], t_inf inf)
 	int				i;
 	double			tmp;
 
-	pos[CR] = inf.jr;
-	pos[CI] = inf.ji;
+	pos[CR] = 0.84;
+	pos[CI] = 0.31;
 	pos[ZR] = coords[X];
 	pos[ZI] = coords[Y];
 	i = 0;
 	while (i < inf.def && (PYTH(pos[ZR], pos[ZI]) < 4))
 	{
 		tmp = pos[ZR];
-		pos[ZR] = pos[ZR] * pos[ZR] - pos[ZI] * pos[ZI] + pos[CR];
-		pos[ZI] = 2 * pos[ZI] * tmp + pos[CI];
+		pos[ZR] = pos[ZR] * pos[ZR] - pos[ZI] * pos[ZR] * pos[ZI] + pos[CR];
+		pos[ZI] = pos[ZR] * tmp + pos[CI];
 		i++;
 	}
 	return (i);
 }
 
-void				julia(t_inf inf)
+void				otfif(t_inf inf)
 {
 	long double		coords[6];
 	int				itera;
@@ -51,7 +51,7 @@ void				julia(t_inf inf)
 			{
 				itera = iterations(coords, inf);
 				set_pixie(&inf, TRX(coords[X], inf), TRY(coords[Y], inf),
-					((itera * 5) << 16) + (itera * 5));
+					((itera * 5) << 8) + (itera * 5));
 			}
 		}
 	}
