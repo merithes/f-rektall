@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 17:51:38 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 10:03:45 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 10:13:38 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ t_inf				*set_inf(void)
 	return (outp);
 }
 
-int					check_inp(char av[])
+int					check_inp(char *av)
 {
+	if (!av)
+		return (-1);
 	if (!ft_strcmp("mandelbrot", av))
 		return (0);
 	else if (!ft_strcmp("julia", av))
@@ -69,7 +71,7 @@ t_inf				*fractal_initiate(int ac, char *av[])
 
 	if (ac == 1 || ac > 2 || 0 > check_inp(av[1]))
 		pcat(DARGO, DARGS, (char *)(outp = (t_inf *)NULL), 0);
-	else if (!(outp = set_inf()))
+	if ((0 > check_inp(av[1])) || !(outp = set_inf()))
 		return (NULL);
 	if (!ft_strcmp("mandelbrot", av[1]))
 		outp->fractal = MANDL;

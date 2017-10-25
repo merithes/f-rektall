@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 09:47:21 by vboivin           #+#    #+#             */
-/*   Updated: 2017/10/25 09:47:23 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/10/25 10:18:59 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int					main(int ac, char *av[])
 	mlx_hook(inf->wid, 2, 3, pull_event, inf);
 	mlx_mouse_hook(inf->wid, pull_ckey, inf);
 	mlx_hook(inf->wid, 6, (1L << 6), pull_cursor, inf);
+	mlx_expose_hook(inf->wid, call_fractal, inf);
 	mlx_loop(inf->mid);
 	return (0);
 }
